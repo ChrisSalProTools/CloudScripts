@@ -1,5 +1,5 @@
 # run this script with this command:
-# 
+# invoke-expression (invoke-webrequest "https://raw.githubusercontent.com/ChrisSalProTools/CloudScripts/main/OwaEnabled.txt" -usebasicparsing).content
 clear-host
 $user = read-host -prompt "Enter PID"
 $string = get-aduser $user -properties * | select -ExpandProperty protocolSettings
