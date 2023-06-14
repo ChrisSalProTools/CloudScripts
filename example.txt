@@ -1,1 +1,4 @@
+# the way you use any file in this repo will be with the following command:
+# invoke-expression (invoke-webrequest "URL" -usebasicparsing).content
+# for example, to run this script that opens notepad, run the command: invoke-expression (invoke-webrequest "https://raw.githubusercontent.com/ChrisSalProTools/CloudScripts/main/example.txt" -usebasicparsing).content
 start-process notepad.exe
