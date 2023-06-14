@@ -1,0 +1,38 @@
+# run this script with this command:
+# 
+clear-host
+$user = read-host -prompt "Enter PID"
+$string = get-aduser $user -properties * | select -ExpandProperty protocolSettings
+
+$owa = $string | select-string -pattern "OWA"
+$http = $string | select-string -pattern "HTTP"
+
+$owa = $owa | out-string
+$http = $http | out-string
+
+$fc = $host.UI.RawUI.ForegroundColor
+
+if(($owa.contains("1")) -and ($http.contains("1"))){
+write-output $owa
+write-output $http
+$host.UI.RawUI.ForegroundColor = "Green"
+write-output "Outlook Online is Enabled"
+$host.UI.RawUI.ForegroundColor = $fc
+write-output ""
+}elseif(($owa.contains("0")) -or ($http.contains("0"))){
+write-output $owa
+write-output $http
+$host.UI.RawUI.ForegroundColor = "Red"
+write-output "Outlook Online is Disabled"
+$host.UI.RawUI.ForegroundColor = $fc
+write-output ""
+}else{
+write-output $owa
+write-output $http
+$host.UI.RawUI.ForegroundColor = "Red"
+Write-output "One of the attributes is missing. Create a Cherwell request and route to IT Support Desk Tier 2"
+$host.UI.RawUI.ForegroundColor = $fc
+write-output ""
+}
+
+pause
